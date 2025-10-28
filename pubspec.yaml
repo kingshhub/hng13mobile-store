@@ -1,0 +1,60 @@
+name: storekeeper_app
+description: A storekeeper app to manage product inventory locally.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # State Management
+  provider: ^6.0.5
+
+  # Local Relational Database (Sqflite)
+  sqflite: ^2.3.0
+  path_provider: ^2.1.1
+  path: ^1.8.3
+
+  # Native Feature: Camera/Gallery Integration
+  image_picker: ^1.0.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.3.10
+
+flutter:
+  uses-material-design: true
+
+
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "storekeeper_icon.png"
+  remove_alpha_ios: true
+
+flutter_native_splash:
+  color: "#1976D2"
+  image: assets/splash_logo.png
+  android: true
+  ios: true
+  android_gravity: center
+  ios_content_mode: center
+
+
+
+
+
+# IMPORTANT: For image_picker to work on iOS, you must add privacy descriptions
+# to ios/Runner/Info.plist:
+# <key>NSCameraUsageDescription</key>
+# <string>To capture product images.</string>
+# <key>NSPhotoLibraryUsageDescription</key>
+# <string>To select product images from the gallery.</string>
