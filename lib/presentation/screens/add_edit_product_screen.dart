@@ -226,7 +226,7 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
                 decoration: InputDecoration(
-                  labelText: 'Price (\₦)',
+                  labelText: 'Price (₦)',
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8)),
                   prefixIcon: const Icon(Icons.attach_money),
