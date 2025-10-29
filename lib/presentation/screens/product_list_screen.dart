@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:provider/provider.dart';
 import 'package:storekeeper_app/data/models/product_model.dart';
 import 'package:storekeeper_app/presentation/providers/product_provider.dart';
+import 'package:storekeeper_app/presentation/providers/store_provider.dart';
 import 'package:storekeeper_app/presentation/screens/add_edit_product_screen.dart';
 
 class ProductListScreen extends StatelessWidget {
@@ -12,7 +13,12 @@ class ProductListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Store Inventory'),
+        title: Consumer<StoreProvider>(
+          builder: (context, storeProvider, _) {
+            final storeName = storeProvider.storeName ?? 'Store Inventory';
+            return Text(storeName);
+          },
+        ),
         backgroundColor: Colors.blue.shade700,
         foregroundColor: Colors.white,
         elevation: 0,
@@ -83,7 +89,7 @@ class _ProductCard extends StatelessWidget {
       builder: (BuildContext dialogContext) {
         return AlertDialog(
           title: const Text('Confirm Deletion'),
-          content: Text('Are you sure you want to delete "${product.name}"?'),
+          content: Text('Are you sure you want to delete"${product.name}"?'),
           actions: <Widget>[
             TextButton(
               child: const Text('Cancel'),

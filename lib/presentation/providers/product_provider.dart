@@ -13,12 +13,10 @@ class ProductProvider with ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  // Constructor: Load data immediately on initialization
   ProductProvider() {
     loadProducts();
   }
 
-  // READ Operation: Load all products from the database
   Future<void> loadProducts() async {
     _isLoading = true;
     notifyListeners();
@@ -95,4 +93,6 @@ class ProductProvider with ChangeNotifier {
       debugPrint('Error deleting product: $e');
     }
   }
+
+  Future setStoreName(String text) async {}
 }

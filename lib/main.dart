@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:storekeeper_app/presentation/providers/product_provider.dart';
+import 'package:storekeeper_app/presentation/providers/store_provider.dart';
 import 'package:storekeeper_app/presentation/screens/product_list_screen.dart';
+import 'package:storekeeper_app/presentation/screens/store_setup_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,13 +15,14 @@ class StorekeeperApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => ProductProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ProductProvider()),
+        ChangeNotifierProvider(create: (_) => StoreProvider()..loadStoreName()),
+      ],
       child: MaterialApp(
         title: 'Mobile Store Inventory',
         debugShowCheckedModeBanner: false,
-
-        //  Light Theme
         theme: ThemeData(
           brightness: Brightness.light,
           primaryColor: const Color(0xFF1976D2),
@@ -30,8 +33,6 @@ class StorekeeperApp extends StatelessWidget {
             brightness: Brightness.light,
           ),
         ),
-
-        //  Dark Theme
         darkTheme: ThemeData(
           brightness: Brightness.dark,
           primaryColor: const Color(0xFF1976D2),
@@ -42,12 +43,22 @@ class StorekeeperApp extends StatelessWidget {
             brightness: Brightness.dark,
           ),
         ),
-
-        //  Auto-switch based on system settings
         themeMode: ThemeMode.system,
-
-        //  Home Screen
-        home: const ProductListScreen(),
+        routes: {
+          '/': (context) => Consumer<StoreProvider>(
+                builder: (context, storeProvider, _) {
+                  if (!storeProvider.isInitialized) {
+                    return const Scaffold(
+                        body: Center(child: CircularProgressIndicator()));
+                  }
+                  if (storeProvider.storeName == null) {
+                    return const StoreSetupScreen();
+                  }
+                  return const ProductListScreen();
+                },
+              ),
+          '/store-setup': (context) => const StoreSetupScreen(),
+        },
       ),
     );
   }

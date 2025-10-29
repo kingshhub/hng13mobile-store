@@ -46,7 +46,7 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
       source: source,
       maxHeight: 480,
       maxWidth: 640,
-      imageQuality: 70, // Good balance for mobile storage
+      imageQuality: 70,
     );
 
     if (pickedFile != null) {
@@ -226,7 +226,7 @@ class _AddEditProductScreenState extends State<AddEditProductScreen> {
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
                 decoration: InputDecoration(
-                  labelText: 'Price (\$)',
+                  labelText: 'Price (\₦)',
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8)),
                   prefixIcon: const Icon(Icons.attach_money),
